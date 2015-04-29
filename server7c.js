@@ -1,5 +1,5 @@
 //  STATIC FILE SERVER NO 7 WITH WEBSOCKETS/SOCKET.IO SUPPORT.  (SERVER VERSION C)
-//copyright 2015 R3Plex Inc.
+//2015 R3Plex Inc.
 
 
 //Load Key Modules
@@ -18,10 +18,10 @@ var http = require('http'),
  var filePath;
 
 
-// creation of server, listening at...
-var Server=http.createServer(_handler).listen(8080);
+// creation of server, listening at 5000 for HEROKU...
+var Server=http.createServer(_handler).listen(5000);
 
-console.log(' Server 7 running at http://127.0.0.1:8080/');
+console.log(' Server 7 running at http://127.0.0.1:5000/');
 
 
 
