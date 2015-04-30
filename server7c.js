@@ -17,9 +17,11 @@ var http = require('http'),
  var url;
  var filePath;
 
+ // set port dynamically for Heroku and 5000 for local
+ var port = ( process.env.PORT||5000 );
 
 // creation of server, listening at 5000 for HEROKU...
-var Server=http.createServer(_handler).listen(5000);
+var Server=http.createServer(_handler).listen(port);
 
 console.log(' Server 7 running at http://127.0.0.1:5000/');
 
