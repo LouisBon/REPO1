@@ -20,6 +20,10 @@ var http = require('http'),
  // set port dynamically for Heroku and 5000 for local
  var port = ( process.env.PORT||5000 );
 
+// Global Variables
+
+  var CubeState=0; Initial value is at rest
+
 // creation of server, listening at 5000 for HEROKU...
 var Server=http.createServer(_handler).listen(port);
 
@@ -154,8 +158,8 @@ function _handler(req, res) {
      //Socket.io emits this event when a connection is made.
         io.sockets.on('connection', function (socket) {
 
-  // Emit a message to send it to the client.indicating connection is DONE !
-   socket.emit('ping', { msg: 'SERVER MESSAGE. YOU ARE CONNECTED TO ME THRU WEB SOCKETS.' });
+  // Emit a message to send it to the client.indicating connection is DONE ! & the state of the cube !
+   socket.emit('StateCube', { msg: 'SERVER SAYS THE STATE OF CUBE SHOULD BE SET TO', CubeState  });
 
 
   // Console Log messages from the client.
