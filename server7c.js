@@ -159,7 +159,7 @@ function _handler(req, res) {
         io.sockets.on('connection', function (socket) {
 
   // Emit a message to send it to the client.indicating connection is DONE ! & the state of the cube !
-   socket.emit('StateCube', { msg: 'SERVER SAYS THE STATE OF CUBE SHOULD BE SET TO', CubeState  });
+   socket.emit('StateCube', { msg: 'SERVER SAYS THE STATE OF CUBE SHOULD BE SET TO', 'CubeState':CubeState  });
 
 
   // Console Log messages from the client.
