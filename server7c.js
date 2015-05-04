@@ -22,7 +22,7 @@ var http = require('http'),
 
 // Global Variables
 
-  var CubeState=0; Initial value is at rest
+  var CubeState=0;// Initial value is at rest
 
 // creation of server, listening at 5000 for HEROKU...
 var Server=http.createServer(_handler).listen(port);
