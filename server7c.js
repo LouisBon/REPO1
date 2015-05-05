@@ -22,7 +22,7 @@ var http = require('http'),
 
 // Global Variables
 
-  var CubeState=0;// Initial value is at rest
+  var CubeState=false;// CubeState is equivalentto picked variable in client namely False is at rest!
 
 // creation of server, listening at 5000 for HEROKU...
 var Server=http.createServer(_handler).listen(port);
@@ -159,7 +159,7 @@ function _handler(req, res) {
         io.sockets.on('connection', function (socket) {
 
   // Emit a message to send it to the client.indicating connection is DONE ! & the state of the cube !
-   socket.emit('StateCube', { msg: 'SERVER SAYS THE STATE OF CUBE SHOULD BE SET TO', 'CubeState':CubeState  });
+   socket.emit('StateofCube', {CubeState: CubeState  });
 
 
   // Console Log messages from the client.
@@ -168,6 +168,9 @@ function _handler(req, res) {
     console.log(data.msg);
 
  socket.emit('authorization', { msg: ' SERVER MESSAGE : 2. TRIGGER or STOP CUBE' });
+ // But flip CubeStateflag namely:
+ 
+ CubeState=!CubeState;
 
 });
 
