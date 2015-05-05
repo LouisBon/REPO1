@@ -240,10 +240,10 @@ var picked=false;
               document.getElementById("msg").innerHTML = (" YOU ARE CONNECTED TO SERVER and CUBE MOVING STATE IS ==  " + data.CubeState);
               picked= data.CubeState;
               // If present state of cube is TRUE , trigger animation !
-              if (!picked){
+              if (picked){
               // Trigger the animation
               myScene.beginAnimation(myCube, 0, 60, true);
-              picked=true;
+
               }
 
               // Send a message back to the server
@@ -273,12 +273,14 @@ var picked=false;
                 socket.on('authorization', function(data){
                 // Modify the DOM to show the message
               document.getElementById("msg").innerHTML = data.msg;
-              if (!picked){
+              // Got authorization, flip picked variable
+              picked= !picked;
+              if (picked){
               // Trigger the animation
               myScene.beginAnimation(myCube, 0, 60, true);
               picked=true;
               }
-              else if (picked){
+              else if (!picked){
               //STOP the animatiom
               myScene.stopAnimation(myCube);
               picked=false;
