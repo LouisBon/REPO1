@@ -171,7 +171,8 @@ function _handler(req, res) {
  // But flip CubeStateflag namely:
  
  CubeState=!CubeState;
-
+ // Nowbroadcat  to EVERYONE ELSE TO DO THE SAME
+ socket.broadcast.emit('authorization', { msg: ' TO ALL SOMEONE DECIDED TO CHANGE THE CUBE' });
 });
 
 
