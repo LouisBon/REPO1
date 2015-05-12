@@ -20,9 +20,17 @@ var http = require('http'),
  // set port dynamically for Heroku and 5000 for local
  var port = ( process.env.PORT||5000 );
 
-// Global Variables
+// Create Global Object GStates to keep track of all states
 
-  var CubeState=false;// CubeState is equivalentto picked variable in client namely False is at rest!
+  var GStates={
+       welcomemsg: " SERVER MESSAGE -- HOWDY USER NO =  ",
+       cubestate :false,// CubeState is equivalentto picked variable in client namely False is at rest!
+       totalusers: 0,
+       };
+
+  var UsersSockets=[];
+
+  
 
 // creation of server, listening at 5000 for HEROKU...
 var Server=http.createServer(_handler).listen(port);
@@ -152,16 +160,23 @@ function _handler(req, res) {
 
 }
 
-    //    Loading scoket.io
+    //    Loading socket.io
     io = require('socket.io').listen(Server),
 
      //Socket.io emits this event when a connection is made.
         io.sockets.on('connection', function (socket) {
 
-  // Emit a message to send it to the client.indicating connection is DONE ! & the state of the cube !
-   socket.emit('StateofCube', {CubeState: CubeState  });
+     //Record info and add to GlobalStates
+        UsersSockets[GStates.totalusers]=socket;
+        GStates.totalusers=GStates.totalusers + 1 ;
 
 
+  // Emit a message to send it to the client.indicating connection is ON ! & the global states
+   socket.emit('Init',GStates);
+
+   console.log("GStates=  ",GStates);
+   console.log("UsersSockets = ", UsersSockets;
+   
   // Console Log messages from the client.
 
   socket.on('authorization', function (data) {
