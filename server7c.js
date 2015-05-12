@@ -163,10 +163,10 @@ function _handler(req, res) {
     //    Loading socket.io
     io = require('socket.io').listen(Server),
 
-     //Socket.io emits this event when a connection is made.
-        io.sockets.on('connection', function (socket) {
+    //Socket.io emits this event when a connection is made.
+     io.sockets.on('connection', function (socket) {
 
-     //Record info and add to GlobalStates
+    //Record info and add to GlobalStates
         UsersSockets[GStates.totalusers]=socket;
         GStates.totalusers=GStates.totalusers + 1 ;
 
@@ -182,14 +182,18 @@ function _handler(req, res) {
   socket.on('authorization', function (data) {
     console.log(data.msg);
 
+ // Give user OK to change cube state !
  socket.emit('authorization', { msg: ' SERVER MESSAGE : 2. TRIGGER or STOP CUBE' });
- // But flip CubeStateflag namely:
- 
- CubeState=!CubeState;
+
+ // And flip cubestate flag in GStatesobject namely:
+ GStates.cubestate=!  GStates.cubestate;
+
  // Nowbroadcat  to EVERYONE ELSE TO DO THE SAME
  socket.broadcast.emit('authorization', { msg: ' TO ALL SOMEONE DECIDED TO CHANGE THE CUBE' });
-});
 
+ io.sockets.on('disconnect', function () {
+ GStates.totalusers=GStates.totalusers -1 ;
+ });
 
 
 
