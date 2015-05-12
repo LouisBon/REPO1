@@ -175,7 +175,7 @@ function _handler(req, res) {
    socket.emit('Init',GStates);
 
    console.log("GStates=  ",GStates);
-   console.log("UsersSockets = ", UsersSockets;
+   console.log("UsersSockets = ", UsersSockets);
    
   // Console Log messages from the client.
 
