@@ -330,6 +330,16 @@ var picked=false;
                 
                  
                 
+// Taking care of user logging off for now...
+
+  window.onbeforeunload= function() {
+ socket.emit('disconnect', {
+                msg: "  CLIENT MESSAGE:  SHUTTING DOWN "
+                 });
+ };
+
+
+
  </script>
 
 
