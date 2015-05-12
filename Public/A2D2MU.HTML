@@ -232,13 +232,13 @@ var picked=false;
             var socket = io.connect();
             var time=0;
             // React to a received message
-            socket.on('StateofCube', function (data) {
+            socket.on('Init', function (data) {
                if (time == 0) {
                // we are connected to server ..
                connected=1;
               // Modify the DOM to show the message
-              document.getElementById("msg").innerHTML = (" YOU ARE CONNECTED TO SERVER and CUBE MOVING STATE IS ==  " + data.CubeState);
-              picked= data.CubeState;
+              document.getElementById("msg").innerHTML = ( data.welcomemsg + data.totalusers);
+              picked= data.cubestate;
               // If present state of cube is TRUE , trigger animation !
               if (picked){
               // Trigger the animation
