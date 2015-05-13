@@ -198,7 +198,7 @@ function _handler(req, res) {
 
           });
 
-        sockets.on('disconnect', function () {
+        socket.on('disconnect', function () {
         // GStates.totalusers=GStates.totalusers -1 ;
         socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   has LOGGED OFF ') });
          });
