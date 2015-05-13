@@ -195,12 +195,18 @@ function _handler(req, res) {
                 // Now Broadcat  to EVERYONE ELSE TO DO THE EVENT
                 socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   CHANGED THE CUBE STATE ') });
 
-// io.sockets.on('disconnect', function () {
-// GStates.totalusers=GStates.totalusers -1 ;
- });
+
+          });
+
+        sockets.on('disconnect', function () {
+        // GStates.totalusers=GStates.totalusers -1 ;
+        socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   has LOGGED OFF ') });
+         });
 
 
 
-});
+
+
+     });
 
 
