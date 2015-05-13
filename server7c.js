@@ -176,6 +176,7 @@ function _handler(req, res) {
 
    console.log("GStates=  ",GStates);
    console.log("UsersSockets = ", UsersSockets);
+   socket.UserId = GStates.totalusers;
    
   // Console Log messages from the client.
 
@@ -183,7 +184,7 @@ function _handler(req, res) {
     console.log(data.msg);
 
  // Give user OK to change cube state !
- socket.emit('authorization', { msg: ' SERVER MESSAGE : 2. TRIGGER or STOP CUBE' });
+ socket.emit('authorization', { msg: (' SERVER MESSAGE : USER  '+ socket.UserId + ' U HAVE GREEN LIGHT  TO TRIGGER or STOP CUBE') });
 
  // And flip cubestate flag in GStatesobject namely:
  GStates.cubestate=!  GStates.cubestate;
