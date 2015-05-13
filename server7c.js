@@ -160,37 +160,40 @@ function _handler(req, res) {
 
 }
 
-    //    Loading socket.io
-    io = require('socket.io').listen(Server),
+// Loading socket.io
+ io = require('socket.io').listen(Server),
 
     //Socket.io emits this event when a connection is made.
      io.sockets.on('connection', function (socket) {
 
-    //Record info and add to GlobalStates
+        //Record info and add to GlobalStates
         UsersSockets[GStates.totalusers]=socket;
         GStates.totalusers=GStates.totalusers + 1 ;
 
 
-  // Emit a message to send it to the client.indicating connection is ON ! & the global states
-   socket.emit('Init',GStates);
+        // Emit a message to send it to the client.indicating connection active & the global states
+        socket.emit('Init',GStates);
 
-   console.log("GStates=  ",GStates);
-   console.log("UsersSockets = ", UsersSockets);
-   socket.UserId = GStates.totalusers;
+        // Store UserId in socket object
+        socket.UserId = GStates.totalusers;
+
+        console.log("GStates=  ",GStates);
+        console.log("UsersSockets = ", UsersSockets);
+
    
-  // Console Log messages from the client.
+        // Console Log messages from the client.
 
-  socket.on('authorization', function (data) {
-    console.log(data.msg);
+        socket.on('authorization', function (data) {
+        console.log(data.msg);
 
- // Give user OK to change cube state !
- socket.emit('authorization', { msg: (' SERVER MESSAGE : USER  '+ socket.UserId + ' U HAVE GREEN LIGHT  TO TRIGGER or STOP CUBE') });
+                // Give user OK to change cube state !
+                socket.emit('authorization', { msg: (' SERVER MESSAGE : USER NO '+ socket.UserId + ' U have  GREEN LIGHT  to change CUBE  STATE') });
 
- // And flip cubestate flag in GStatesobject namely:
- GStates.cubestate=!  GStates.cubestate;
+                // And flip cubestate flag in GStatesobject namely:
+                GStates.cubestate=!  GStates.cubestate;
 
- // Nowbroadcat  to EVERYONE ELSE TO DO THE SAME
- socket.broadcast.emit('authorization', { msg: ' TO ALL SOMEONE DECIDED TO CHANGE THE CUBE' });
+                // Now Broadcat  to EVERYONE ELSE TO DO THE EVENT
+                socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserID +'   CHANGED THE CUBE STATE ') });
 
 // io.sockets.on('disconnect', function () {
 // GStates.totalusers=GStates.totalusers -1 ;
