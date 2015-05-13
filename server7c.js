@@ -193,7 +193,7 @@ function _handler(req, res) {
                 GStates.cubestate=!  GStates.cubestate;
 
                 // Now Broadcat  to EVERYONE ELSE TO DO THE EVENT
-                socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserID +'   CHANGED THE CUBE STATE ') });
+                socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   CHANGED THE CUBE STATE ') });
 
 // io.sockets.on('disconnect', function () {
 // GStates.totalusers=GStates.totalusers -1 ;
