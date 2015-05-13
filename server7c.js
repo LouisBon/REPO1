@@ -191,8 +191,8 @@ function _handler(req, res) {
  // Nowbroadcat  to EVERYONE ELSE TO DO THE SAME
  socket.broadcast.emit('authorization', { msg: ' TO ALL SOMEONE DECIDED TO CHANGE THE CUBE' });
 
- io.sockets.on('disconnect', function () {
- GStates.totalusers=GStates.totalusers -1 ;
+// io.sockets.on('disconnect', function () {
+// GStates.totalusers=GStates.totalusers -1 ;
  });
 
 
