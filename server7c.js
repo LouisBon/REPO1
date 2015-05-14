@@ -199,7 +199,7 @@ function _handler(req, res) {
           });
 
         socket.on('disconnect', function () {
-        // GStates.totalusers=GStates.totalusers -1 ;
+        GStates.totalusers=GStates.totalusers -1 ;
 
         // check for all users logged off and if so reinitialize  GStates
                 if (GStates.totalusers < 1) {
