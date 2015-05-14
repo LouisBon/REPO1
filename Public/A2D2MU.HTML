@@ -227,45 +227,28 @@ var picked=false;
                                        //divPick.innerHTML = "Total vertices: " + myScene.getActiveVertices();
                     myScene.render();
                     });
-    //This is the BIG TEST
-     // Connect to socket.io
+
+     // CONNECT TO SOCKET.IO
+     
             var socket = io.connect();
             var time=0;
-            // React to a received message
+
+            // React to a received message  and check state of cube and trigger it if needed
             socket.on('Init', function (data) {
+
                if (time == 0) {
                // we are connected to server ..
                connected=1;
               // Modify the DOM to show the message
               document.getElementById("msg").innerHTML = ( data.welcomemsg + data.totalusers);
               picked= data.cubestate;
-              // If present state of cube is TRUE , trigger animation !
-              if (picked){
-              // Trigger the animation
-              myScene.beginAnimation(myCube, 0, 60, true);
+                        // If present state of cube is TRUE , trigger animation !
+                        if (picked){
+                        // Trigger the animation
+                        myScene.beginAnimation(myCube, 0, 60, true);
 
-              }
+                        }
 
-              // Send a message back to the server
-              socket.emit('pong', {
-                msg: "  CLIENT MESSAGE:  The client browser also knows socket.io."
-                 });
-              // time=1;
-              }
-              else {
-              //console.log( JSON.parse(data));
-              // SECONG MESSAGE SEND TO SERVER
-               document.getElementById("msg").innerHTML = data.msg;
-               socket.emit('pong', {
-                msg: " CLIENT MESSAGE: 2. The client browser is  VERY SMART"
-                 });
-                // start anim here
-                if (picked)
-                {
-                myScene.beginAnimation(myCube, 0, 60, true);
-                }
-
-               time=1;
 
               }
 
