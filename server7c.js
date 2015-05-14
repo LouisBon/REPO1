@@ -187,7 +187,7 @@ function _handler(req, res) {
         console.log(data.msg);
 
                 // Give user OK to change cube state !
-                socket.emit('authorization', { msg: (' SERVER MESSAGE : USER NO '+ socket.UserId + ' U have  GREEN LIGHT  to change CUBE  STATE') });
+                socket.emit('authorization', { msg: (' SERVER MESSAGE : USER NO '+ socket.UserId + ' YOU HAVE THE GREEN LIGHT  TO CHANGE CUBE  STATE') });
 
                 // And flip cubestate flag in GStatesobject namely:
                 GStates.cubestate=!  GStates.cubestate;
@@ -200,7 +200,17 @@ function _handler(req, res) {
 
         socket.on('disconnect', function () {
         // GStates.totalusers=GStates.totalusers -1 ;
-        socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   has LOGGED OFF ') });
+
+        // check for all users logged off and if so reinitialize  GStates
+                if (GStates.totalusers < 1) {
+                GStates.cubestate =false;
+                GStates.totalusers = 0;
+                }
+                else {
+
+                socket.broadcast.emit('authorization', { msg: (' TO ALL : USER NO '+ socket.UserId +'   HAS LOGGED OFF ') });
+                }
+
          });
 
 
